@@ -1,0 +1,23 @@
+# 私有配置（千万不要提交！）
+private-key.pem
+*.pem
+processed_comments.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# xbot 本地数据
+data/
+logs/
+.xbot/
+
+# 系统文件
+.DS_Store
+Thumbs.db

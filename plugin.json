@@ -1,0 +1,31 @@
+{
+  "id": "my.ghbot",
+  "name": "GitHub Code Reviewer",
+  "version": "1.1.0",
+  "description": "GitHub App 插件：在被 @mention 时自动对 PR 进行 Code Review 并评论。支持 poll/webhook 双模式、白名单/黑名单。",
+  "runtime": "grpc",
+  "entry": "python3 main.py",
+  "permissions": ["channels.register", "context.enrich"],
+  "contributes": {
+    "channelProvider": {
+      "name": "github",
+      "config_schema": [
+        {"key": "enabled", "label": "启用", "type": "toggle", "default_value": "false"},
+        {"key": "mode", "label": "运行模式", "type": "select", "options": ["poll", "webhook"], "default_value": "poll"},
+        {"key": "app_id", "label": "GitHub App ID", "type": "text", "default_value": ""},
+        {"key": "private_key", "label": "Private Key (PEM)", "type": "text", "default_value": "", "description": "GitHub App 私钥，完整 PEM 格式。也可通过环境变量 GITHUB_PRIVATE_KEY_FILE 指定文件路径"},
+        {"key": "installation_id", "label": "Installation ID", "type": "number", "default_value": "0", "description": "留 0 则自动按仓库查找"},
+        {"key": "bot_username", "label": "Bot 用户名（用于检测 @mention）", "type": "text", "default_value": "code-reviewer-bot"},
+        {"key": "poll_interval", "label": "轮询间隔（秒）", "type": "number", "default_value": "10"},
+        {"key": "monitored_repos", "label": "监控仓库（逗号分隔，留空=自动发现全部）", "type": "text", "default_value": ""},
+        {"key": "webhook_secret", "label": "Webhook Secret（仅 webhook 模式）", "type": "password", "default_value": ""},
+        {"key": "webhook_port", "label": "Webhook 端口（仅 webhook 模式）", "type": "number", "default_value": "9876"},
+        {"key": "whitelist_repos", "label": "仓库白名单（逗号分隔，留空=全部允许）", "type": "text", "default_value": ""},
+        {"key": "blacklist_repos", "label": "仓库黑名单（逗号分隔）", "type": "text", "default_value": ""},
+        {"key": "whitelist_users", "label": "用户白名单（逗号分隔，留空=全部允许）", "type": "text", "default_value": ""},
+        {"key": "blacklist_users", "label": "用户黑名单（逗号分隔）", "type": "text", "default_value": ""},
+        {"key": "trigger_on_open", "label": "PR 创建时自动触发", "type": "toggle", "default_value": "false"}
+      ]
+    }
+  }
+}
